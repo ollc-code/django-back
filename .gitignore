@@ -1,1 +1,17 @@
-__pycache__
+# Distribution / packaging
+.Python
+venv/
+env/
+*.sqlite3
+.idea/
+
+# Database
+db.sqlite3
+
+# Editor directories and files
+.idea
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
