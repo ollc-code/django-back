@@ -1,1 +1,1 @@
-web: gunicorn orlem_connect.orlem_connect.wsgi --log-file -
+web: gunicorn orlem_connect.wsgi --log-file -
