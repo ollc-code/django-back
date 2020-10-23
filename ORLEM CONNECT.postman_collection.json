@@ -1,0 +1,428 @@
+{
+	"info": {
+		"_postman_id": "cf74db28-4c37-4815-b31e-2a7602d170f8",
+		"name": "ORLEM CONNECT",
+		"description": "Rest APIs for Orlem Connect",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Login / Get Token",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "5dc5b1ea-7e15-474b-b427-dded5cffe061",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "a1cd0e18-5eec-4e9f-8b47-db27096779b0",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"token\", jsonData.token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "kp",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "kp",
+									"type": "text"
+								}
+							],
+							"options": {
+								"formdata": {}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/auth/jwt/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"auth",
+								"jwt",
+								""
+							]
+						},
+						"description": "Creates a new JWT token."
+					},
+					"response": []
+				},
+				{
+					"name": "Verify Token",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "a986d21b-f255-4cc9-bbe8-9311cf66b839",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "text"
+								}
+							],
+							"options": {
+								"formdata": {}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/auth/jwt_verify/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"auth",
+								"jwt_verify",
+								""
+							]
+						},
+						"description": "Checks whether Token is still valid.\r\nIf valid, Returns status code 200 and token\r\nElse, returns 400, with error message."
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh Token",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "da0d2643-f5b2-44c0-9e67-9452af4da910",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "064e0f98-061b-421a-a55d-a40125fed5c0",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "text"
+								}
+							],
+							"options": {
+								"formdata": {}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/auth/jwt_refresh/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"auth",
+								"jwt_refresh",
+								""
+							]
+						},
+						"description": "Creates new token if expired.\r\nElse, returns token."
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Bible",
+			"item": [
+				{
+					"name": "Bible All",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f7d6b050-76ed-4350-9a0f-62869a12acfc",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost:8000/bible/all/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"bible",
+								"all",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set Reading",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "21c130fd-a4d3-4c85-92f2-e236ed636185",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "c02063d2-fb13-4339-9740-770a350f9c8c",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "date",
+									"value": "2020-10-23",
+									"type": "text"
+								},
+								{
+									"key": "reading",
+									"value": "R2",
+									"type": "text"
+								},
+								{
+									"key": "book",
+									"value": "Psalms",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "{\"5\" : [[1,9]]}",
+									"type": "text"
+								}
+							],
+							"options": {
+								"formdata": {}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/bible/todays_read/?=",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"bible",
+								"todays_read",
+								""
+							],
+							"query": [
+								{
+									"key": "",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set Reading",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "date",
+									"value": "2020-10-23",
+									"type": "text"
+								},
+								{
+									"key": "reading",
+									"value": "G",
+									"type": "text"
+								},
+								{
+									"key": "book",
+									"value": "Genesis",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "{\"1\" : [[2, 6], 9, [10, 13]], \"5\" : [1, [8,9], [15,19]]}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/bible/todays_read/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"bible",
+								"todays_read",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Reading - Today",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/bible/todays_read/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"bible",
+								"todays_read",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"variable": [
+		{
+			"id": "11c608e1-c05c-4216-ab70-a27ce42caa3b",
+			"key": "token",
+			"value": ""
+		},
+		{
+			"id": "de85b542-92eb-4072-89bc-0d257bde6ead",
+			"key": "csrftoken",
+			"value": ""
+		}
+	],
+	"protocolProfileBehavior": {}
+}
