@@ -18,43 +18,32 @@ def put_in_list(dataframe, COLLATED_READINGS):
     return COLLATED_READINGS
     
 
-def query_bible(BOOK_NAME, READINGS):
+def query_bible(BOOK_NAME, ReadingVerses):
     COLLATED_READINGS = []
-    for chap in READINGS.keys():
-        COLLATED_READINGS.append('Chapter %s' %chap)
-        curated_read = BIBLE.loc[(BIBLE.book == BOOK_NAME) & (BIBLE.chapter == int(chap))]
-        for chap_iter in READINGS[chap]:    
-            try:
-                if type(chap_iter) == list:
-                    range_verse = curated_read.loc[(BIBLE.verse >= chap_iter[0]) & (BIBLE.verse < chap_iter[1]+1)].iloc[:, 3:5]
-                    COLLATED_READINGS = put_in_list(range_verse, COLLATED_READINGS)
-                elif type(chap_iter) == int:
-                    atomic_verse = curated_read.loc[BIBLE.verse == chap_iter].iloc[:, 3:5]
-                    COLLATED_READINGS = put_in_list(atomic_verse, COLLATED_READINGS)
-                else:
-                    print('Error occured, please check verse input')
-            except Exception as e:
-                print(e)
+    for RV in ReadingVerses:
+        COLLATED_READINGS.append('Chapter %s' %RV.chapter)
+        curated_read = BIBLE.loc[(BIBLE.book == BOOK_NAME) & (BIBLE.chapter == RV.chapter)]
+        try:
+            if RV.end_verse:
+                range_verse = curated_read.loc[(BIBLE.verse >= RV.start_verse) & (BIBLE.verse < RV.end_verse + 1)].iloc[:, 3:5]
+                COLLATED_READINGS = put_in_list(range_verse, COLLATED_READINGS)
+            else:
+                atomic_verse = curated_read.loc[BIBLE.verse == RV.start_verse].iloc[:, 3:5]
+                COLLATED_READINGS = put_in_list(atomic_verse, COLLATED_READINGS)
+        except Exception as e:
+            print(e)
     return COLLATED_READINGS
 
            
-def runner(BOOK_NAME, READINGS):
-    COLLATED_READINGS = query_bible(BOOK_NAME, READINGS)
+def runner(BOOK_NAME, ReadingVerses):
+    ''' ReadingVerses is the QuerySet; function called in .helpers.py '''
+    COLLATED_READINGS = query_bible(BOOK_NAME, ReadingVerses)
     response = {
         'book' : BOOK_NAME,
-        'chapter' : READINGS,
+        'chapter' : ReadingVerses.values("chapter", "start_verse", "end_verse"),
         'text': [lines for lines in COLLATED_READINGS]
     }
     return response
-
-def today_reading_setter():
-    R = Reading.objects.filter(date = date.today())
-    TODAY_READINGS = {}
-    for r in R:
-        print(r.reading)
-        TODAY_READINGS[r.reading] = runner(r.book, json.loads(r.content))
-
-    return TODAY_READINGS
     
 
 if __name__ == '__main__':
