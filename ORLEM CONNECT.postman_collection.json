@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "cf74db28-4c37-4815-b31e-2a7602d170f8",
-		"name": "ORLEM CONNECT",
+		"_postman_id": "5660b9c2-1efa-41df-b765-c34084f9f74a",
+		"name": "ORLEM CONNECT Copy",
 		"description": "Rest APIs for Orlem Connect",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -15,7 +15,7 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "5dc5b1ea-7e15-474b-b427-dded5cffe061",
+								"id": "ca73cab4-7cb3-4298-92da-9c0b23277beb",
 								"exec": [
 									""
 								],
@@ -25,7 +25,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "a1cd0e18-5eec-4e9f-8b47-db27096779b0",
+								"id": "45e2a3ef-a3dd-42be-b95d-fb9ce5e2a7a0",
 								"exec": [
 									"var jsonData = JSON.parse(responseBody);\r",
 									"pm.collectionVariables.set(\"token\", jsonData.token);"
@@ -84,7 +84,7 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "a986d21b-f255-4cc9-bbe8-9311cf66b839",
+								"id": "5ccd379f-151a-4c93-b2de-2b4e7f93bfff",
 								"exec": [
 									""
 								],
@@ -134,7 +134,7 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "da0d2643-f5b2-44c0-9e67-9452af4da910",
+								"id": "68013230-c97f-4cca-a212-4f96d2a39bbd",
 								"exec": [
 									""
 								],
@@ -144,7 +144,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "064e0f98-061b-421a-a55d-a40125fed5c0",
+								"id": "80401b69-a167-4d8d-846d-ae3e3ced5c0a",
 								"exec": [
 									""
 								],
@@ -195,79 +195,8 @@
 			"name": "Bible",
 			"item": [
 				{
-					"name": "Bible All",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "f7d6b050-76ed-4350-9a0f-62869a12acfc",
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{token}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
-						},
-						"url": {
-							"raw": "http://localhost:8000/bible/all/",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"bible",
-								"all",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Set Reading",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "21c130fd-a4d3-4c85-92f2-e236ed636185",
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"id": "c02063d2-fb13-4339-9740-770a350f9c8c",
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
 					"request": {
-						"auth": {
-							"type": "noauth"
-						},
 						"method": "POST",
 						"header": [
 							{
@@ -277,93 +206,13 @@
 							}
 						],
 						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "date",
-									"value": "2020-10-23",
-									"type": "text"
-								},
-								{
-									"key": "reading",
-									"value": "R2",
-									"type": "text"
-								},
-								{
-									"key": "book",
-									"value": "Psalms",
-									"type": "text"
-								},
-								{
-									"key": "content",
-									"value": "{\"5\" : [[1,9]]}",
-									"type": "text"
-								}
-							],
+							"mode": "raw",
+							"raw": "{\r\n    \"date\" : \"2020-10-25\",\r\n    \"reading\" : \"R1\",\r\n    \"book\" : \"Genesis\",\r\n    \"content\" : {\r\n        \"1\" : [[2, 9]],\r\n        \"5\" : [10, [12, 16]],\r\n        \"10\" : [[2, 5], 20]\r\n    }\r\n}\r\n",
 							"options": {
-								"formdata": {}
-							}
-						},
-						"url": {
-							"raw": "http://127.0.0.1:8000/bible/todays_read/?=",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"bible",
-								"todays_read",
-								""
-							],
-							"query": [
-								{
-									"key": "",
-									"value": ""
+								"raw": {
+									"language": "json"
 								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Set Reading",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{token}}",
-								"type": "text"
 							}
-						],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "date",
-									"value": "2020-10-23",
-									"type": "text"
-								},
-								{
-									"key": "reading",
-									"value": "G",
-									"type": "text"
-								},
-								{
-									"key": "book",
-									"value": "Genesis",
-									"type": "text"
-								},
-								{
-									"key": "content",
-									"value": "{\"1\" : [[2, 6], 9, [10, 13]], \"5\" : [1, [8,9], [15,19]]}",
-									"type": "text"
-								}
-							]
 						},
 						"url": {
 							"raw": "http://127.0.0.1:8000/bible/todays_read/",
