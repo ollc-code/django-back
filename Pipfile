@@ -9,6 +9,8 @@ verify_ssl = true
 django = "*"
 djangorestframework = "*"
 pandas = "*"
+django-cors-middleware = "*"
+django-cors-headers = "*"
 
 [requires]
 python_version = "3.8"
