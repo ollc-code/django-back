@@ -46,12 +46,14 @@ INSTALLED_APPS = [
     'announcement',
 
     ### django rest framework
-    'rest_framework'
+    'rest_framework',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -172,3 +174,7 @@ JWT_AUTH = {
     #'JWT_ISSUER': None,
     #'JWT_LEEWAY': 0,
 }
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+]
