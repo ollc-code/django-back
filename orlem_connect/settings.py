@@ -44,15 +44,18 @@ INSTALLED_APPS = [
     ### created apps
     'user',
     'bible',
+    'announcement',
 
     ### django rest framework
-    'rest_framework'
+    'rest_framework',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -176,5 +179,8 @@ JWT_AUTH = {
     #'JWT_LEEWAY': 0,
 }
 
-
 django_heroku.settings(locals())
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+]

@@ -16,6 +16,8 @@ psycopg2 = "*"
 python-decouple = "*"
 whitenoise = "*"
 djangorestframework-jwt = "*"
+django-cors-middleware = "*"
+django-cors-headers = "*"
 
 [requires]
 python_version = "3.8"

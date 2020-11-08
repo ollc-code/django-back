@@ -5,6 +5,6 @@ from django.contrib import admin
 ### urls for bible app
 
 urlpatterns = [
-    path('all/', bible_views.Bible.as_view(), name='bible'),
+    #path('all/', bible_views.Bible.as_view(), name='bible'),
     path('todays_read/', bible_views.ReadingsToday.as_view(), name='todays_read'),
 ]
