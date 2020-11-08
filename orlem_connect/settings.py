@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     ### created apps
     'user',
     'bible',
+    'announcement',
 
     ### django rest framework
     'rest_framework'

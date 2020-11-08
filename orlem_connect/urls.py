@@ -23,4 +23,5 @@ urlpatterns = [
     ### include paths from apps' urls.py files
     path('auth/', include('user.urls')),
     path('bible/', include('bible.urls')),
+    path('announcements/', include('announcement.urls')),
 ]
