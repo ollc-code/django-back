@@ -24,4 +24,6 @@ urlpatterns = [
     path('auth/', include('user.urls')),
     path('bible/', include('bible.urls')),
     path('announcements/', include('announcement.urls')),
+    path('associations/', include('associations.urls')),
+    path('know_your_priest/' include('know_your_priest.urls'))
 ]
