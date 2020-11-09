@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "5660b9c2-1efa-41df-b765-c34084f9f74a",
-		"name": "ORLEM CONNECT Copy",
+		"_postman_id": "e4e332ae-199b-4a9c-9857-a62f0e413dc7",
+		"name": "Local",
 		"description": "Rest APIs for Orlem Connect",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -15,7 +15,7 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "ca73cab4-7cb3-4298-92da-9c0b23277beb",
+								"id": "864cec28-f1e2-40c9-addb-ceb763a42587",
 								"exec": [
 									""
 								],
@@ -25,7 +25,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "45e2a3ef-a3dd-42be-b95d-fb9ce5e2a7a0",
+								"id": "abb85299-e188-4bd5-80e0-a952ccfebfaf",
 								"exec": [
 									"var jsonData = JSON.parse(responseBody);\r",
 									"pm.collectionVariables.set(\"token\", jsonData.token);"
@@ -84,7 +84,7 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "5ccd379f-151a-4c93-b2de-2b4e7f93bfff",
+								"id": "63e39798-00a2-4993-a1f6-987e7770c824",
 								"exec": [
 									""
 								],
@@ -134,7 +134,7 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "68013230-c97f-4cca-a212-4f96d2a39bbd",
+								"id": "01ab1ad0-92b6-43b7-8873-892a1c784cd8",
 								"exec": [
 									""
 								],
@@ -144,7 +144,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "80401b69-a167-4d8d-846d-ae3e3ced5c0a",
+								"id": "31da6662-0d60-4c06-b79d-8759228de032",
 								"exec": [
 									""
 								],
@@ -196,7 +196,32 @@
 			"item": [
 				{
 					"name": "Set Reading",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3d94ff7f-dbfe-4592-a082-138ebf76ddaf",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f25bd356-ea36-469c-9ac0-03d7272ccb34",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -206,16 +231,35 @@
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"date\" : \"2020-10-25\",\r\n    \"reading\" : \"R1\",\r\n    \"book\" : \"Genesis\",\r\n    \"content\" : {\r\n        \"1\" : [[2, 9]],\r\n        \"5\" : [10, [12, 16]],\r\n        \"10\" : [[2, 5], 20]\r\n    }\r\n}\r\n",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "date",
+									"value": "2020-10-23",
+									"type": "text"
+								},
+								{
+									"key": "reading",
+									"value": "R2",
+									"type": "text"
+								},
+								{
+									"key": "book",
+									"value": "Psalms",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "{\"5\" : [[1,9]]}",
+									"type": "text"
 								}
+							],
+							"options": {
+								"formdata": {}
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/bible/todays_read/",
+							"raw": "http://127.0.0.1:8000/bible/todays_read/?=",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -228,6 +272,12 @@
 								"bible",
 								"todays_read",
 								""
+							],
+							"query": [
+								{
+									"key": "",
+									"value": ""
+								}
 							]
 						}
 					},
@@ -259,16 +309,121 @@
 				}
 			],
 			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Announcements",
+			"item": [
+				{
+					"name": "Get All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/announcements/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"announcements",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Insert",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"announcements\" : [\r\n        \"A1\", \"A2\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/announcements/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"announcements",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete <Id> (* for all)",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"*\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/announcements/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"announcements",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
 		}
 	],
 	"variable": [
 		{
-			"id": "11c608e1-c05c-4216-ab70-a27ce42caa3b",
+			"id": "aa13e91c-1327-4f9e-84a0-c627c589ed2a",
 			"key": "token",
 			"value": ""
 		},
 		{
-			"id": "de85b542-92eb-4072-89bc-0d257bde6ead",
+			"id": "b26426a5-d3ec-4c5d-92f2-1eedf2e922d7",
 			"key": "csrftoken",
 			"value": ""
 		}
