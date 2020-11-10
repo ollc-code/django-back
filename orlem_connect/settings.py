@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'bible',
     'announcement',
     'associations',
-    'know_your_priest'
+    'know_your_priest',
 
     ### django rest framework
     'rest_framework',
@@ -179,4 +179,5 @@ JWT_AUTH = {
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    'https://orlem-connect-react.herokuapp.com',
 ]
