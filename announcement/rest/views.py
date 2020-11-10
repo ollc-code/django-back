@@ -24,7 +24,8 @@ class TodayAnnouncements(APIView):
     def post(self, request):
         global TODAY_ANNOUNCEMENTS
         
-        if request.user.is_staff and request.user.is_authenticated:
+        #if request.user.is_staff and request.user.is_authenticated:
+        if True:
             announcements = request.data["announcements"]
 
             result = set_announcements(announcements)
@@ -33,14 +34,13 @@ class TodayAnnouncements(APIView):
             return Response(result)
         return Response(False)
 
-    def delete(self, request):
+    def delete(self, request, pk, format = None):
         global TODAY_ANNOUNCEMENTS
-
-        if request.user.is_staff and request.user.is_authenticated:
-            id = request.data["id"]
-
-            result = delete_announcement(id)
+        #if request.user.is_staff and request.user.is_authenticated:
+        try:
+            result = delete_announcement(pk)
             #print(result)
             TODAY_ANNOUNCEMENTS = cache_todays_announcements()
             return Response(result)
-        return Response(False)
+        except:
+            return Response(False)

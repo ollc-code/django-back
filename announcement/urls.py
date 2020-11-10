@@ -5,4 +5,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path('', announcement_views.TodayAnnouncements.as_view(), name='today_announcements'),
+    path('<int:pk>/', announcement_views.TodayAnnouncements.as_view(), name='today_announcements'),
 ]

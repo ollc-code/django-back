@@ -19,6 +19,8 @@ djangorestframework-jwt = "*"
 django-cors-middleware = "*"
 django-cors-headers = "*"
 numpy = "==1.19.3"
+django-rest-framework = "*"
+djangorestframework-jwt = "*"
 
 [requires]
 python_version = "3.8"

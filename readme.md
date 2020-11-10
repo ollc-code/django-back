@@ -6,15 +6,13 @@ Follow steps as required...
 
 - Requires `Python 3.8.*`
 
-- Open __CMD__ and `cd` to the directory `django_back`
+- `cd` to `django_back`
 
 - `pip install pipenv`
 
 - `pipenv shell`
 
 - `pipenv install`
-
-- `cd orlem_connect`
 
 - `python manage.py makemigrations`
 

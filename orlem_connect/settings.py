@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'user',
     'bible',
     'announcement',
+    'associations',
+    'know_your_priest',
 
     ### django rest framework
     'rest_framework',
@@ -183,4 +185,5 @@ django_heroku.settings(locals())
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    'https://orlem-connect-react.herokuapp.com',
 ]
