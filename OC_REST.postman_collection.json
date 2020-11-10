@@ -1,0 +1,595 @@
+{
+	"info": {
+		"_postman_id": "56cff2cc-eabc-4dc8-904b-120974fbc05f",
+		"name": "OC_REST",
+		"description": "Rest APIs for Orlem Connect",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Login / Get Token",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "3a22029c-7145-417d-bdf7-4929861ea2d4",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "ed044166-52fb-4214-a4bf-9ba1b589d955",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"token\", jsonData.token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "kp",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "kp",
+									"type": "text"
+								}
+							],
+							"options": {
+								"formdata": {}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/auth/jwt/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"auth",
+								"jwt",
+								""
+							]
+						},
+						"description": "Creates a new JWT token."
+					},
+					"response": []
+				},
+				{
+					"name": "Verify Token",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "16dfe094-e1fc-4642-8559-56d5df218d9c",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "text"
+								}
+							],
+							"options": {
+								"formdata": {}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/auth/jwt_verify/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"auth",
+								"jwt_verify",
+								""
+							]
+						},
+						"description": "Checks whether Token is still valid.\r\nIf valid, Returns status code 200 and token\r\nElse, returns 400, with error message."
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh Token",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "46536dff-693f-4c23-a42c-3e02a18512df",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "6c297add-f2fa-4cd0-9515-7a5e4f9a6dff",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "text"
+								}
+							],
+							"options": {
+								"formdata": {}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/auth/jwt_refresh/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"auth",
+								"jwt_refresh",
+								""
+							]
+						},
+						"description": "Creates new token if expired.\r\nElse, returns token."
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Bible",
+			"item": [
+				{
+					"name": "Set Reading",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fa2fdf95-f763-4282-8092-8d1780ec5802",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "108ad323-77d1-440a-bd88-5d0bded7792d",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "date",
+									"value": "2020-10-23",
+									"type": "text"
+								},
+								{
+									"key": "reading",
+									"value": "R2",
+									"type": "text"
+								},
+								{
+									"key": "book",
+									"value": "Psalms",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "{\"5\" : [[1,9]]}",
+									"type": "text"
+								}
+							],
+							"options": {
+								"formdata": {}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/bible/todays_read/?=",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"bible",
+								"todays_read",
+								""
+							],
+							"query": [
+								{
+									"key": "",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Reading - Today",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/bible/todays_read/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"bible",
+								"todays_read",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Announcements",
+			"item": [
+				{
+					"name": "Get All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/announcements/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"announcements",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Insert",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"announcements\" : [\r\n        \"A1\", \"A2\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/announcements/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"announcements",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete <Id> (* for all)",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"*\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/announcements/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"announcements",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Priests",
+			"item": [
+				{
+					"name": "get_all_priests",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/know_your_priest/priest/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"know_your_priest",
+								"priest",
+								""
+							]
+						},
+						"description": "Gets all priests & deacon values from db"
+					},
+					"response": []
+				},
+				{
+					"name": "insert_priest",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "date_of_birth",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "ordained",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "about",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "associations",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "insert",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_priest_info",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "date_of_birth",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "ordained",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "about",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "associations",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "update",
+									"type": "text"
+								},
+								{
+									"key": "id",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_priest",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/know_your_priest/priest/enter_id_here/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"know_your_priest",
+								"priest",
+								"enter_id_here",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"variable": [
+		{
+			"id": "aa13e91c-1327-4f9e-84a0-c627c589ed2a",
+			"key": "token",
+			"value": ""
+		},
+		{
+			"id": "b26426a5-d3ec-4c5d-92f2-1eedf2e922d7",
+			"key": "csrftoken",
+			"value": ""
+		}
+	],
+	"protocolProfileBehavior": {}
+}
