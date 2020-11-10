@@ -24,3 +24,6 @@ Follow steps as required...
 
 
 ##### Added Postman file: `ORLEM CONNECT.postman_collection.json`  ~ Import to use.
+##### Added Postman file: `OC_REST.postman_collection.json`  ~ Import to use.
+
+> Note: On first run, after cloning repository, empty the /media folder. (files were added for github commit only)
