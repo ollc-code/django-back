@@ -5,7 +5,8 @@ from .serializers import PriestSerializer
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
-import json
+
+from django.core import serializers
 
 class PriestAPIView(APIView):
     
@@ -13,8 +14,8 @@ class PriestAPIView(APIView):
     
     def get(self, request):
         priest = Priest.objects.all()
-        serializer = PriestSerializer(priest, many=True)
-        return Response(serializer.data)
+        sr = serializers.serialize("json", priest)
+        return Response(sr)
     
     def post(self, request):
         r = request.data
