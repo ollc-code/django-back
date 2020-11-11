@@ -1,5 +1,5 @@
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
-from bible.helpers import add_reading, cache_todays_reading
+from bible.helpers import add_reading, cache_todays_reading, get_reading, delete_reading
 from orlem_connect.settings import STATIC_DIR
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -32,15 +32,35 @@ class ReadingsToday(APIView):
 
         return Response(TODAY_READINGS)
     
-    def post(self, request):
-        global TODAY_READINGS
+    
+class Readings(APIView):
+    permission_classes = ()
+
+    def get(self, request, year, month, day):
+        date = "%s-%s-%s"%(year, month, day)
+        result = get_reading(date)
+
+        return Response(result)
+    
+    def post(self, request, year, month, day):
+        date = "%s-%s-%s"%(year, month, day)
         
-        if request.user.is_staff and request.user.is_authenticated:
-            date = request.data["date"] ### YEAR-MONTH-DAY
+        #if request.user.is_staff and request.user.is_authenticated:
+        if True:
             reading = request.data["reading"]
             book = request.data["book"]
             content = request.data["content"]
 
-            result = add_reading(date, reading, book, content) 
-                
-        return Response(result)
+            result = add_reading(date, reading, book, content)   
+            return Response(result)
+        return Response(False)
+    
+    def delete(self, request, year, month, day, reading="*"):
+        date = "%s-%s-%s"%(year, month, day)
+
+        if True:
+            result = delete_reading(date, reading)
+            return Response(result)
+    
+        return Response(False)
+        

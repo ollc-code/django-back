@@ -20,8 +20,11 @@ def put_in_list(dataframe, COLLATED_READINGS):
 
 def query_bible(BOOK_NAME, ReadingVerses):
     COLLATED_READINGS = []
+    previous = None
     for RV in ReadingVerses:
-        COLLATED_READINGS.append('Chapter %s' %RV.chapter)
+        if RV.chapter != previous:
+            previous = RV.chapter
+            COLLATED_READINGS.append('Chapter %s' %previous)
         curated_read = BIBLE.loc[(BIBLE.book == BOOK_NAME) & (BIBLE.chapter == RV.chapter)]
         try:
             if RV.end_verse:
