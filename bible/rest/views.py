@@ -37,13 +37,13 @@ class Readings(APIView):
     permission_classes = ()
 
     def get(self, request, year, month, day):
-        date = "%s-%s-%s"%(year, month, day)
+        date = "%d-%d-%d"%(int(year), int(month), int(day))
         result = get_reading(date)
 
         return Response(result)
     
     def post(self, request, year, month, day):
-        date = "%s-%s-%s"%(year, month, day)
+        date = "%d-%d-%d"%(int(year), int(month), int(day))
         
         #if request.user.is_staff and request.user.is_authenticated:
         if True:
@@ -56,7 +56,7 @@ class Readings(APIView):
         return Response(False)
     
     def delete(self, request, year, month, day, reading="*"):
-        date = "%s-%s-%s"%(year, month, day)
+        date = "%d-%d-%d"%(int(year), int(month), int(day))
 
         if True:
             result = delete_reading(date, reading)
