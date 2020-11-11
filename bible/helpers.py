@@ -1,4 +1,5 @@
 from .models import Reading, ReadingVerse
+from django.core import serializers
 from .reading_getter import runner
 from datetime import date
 import json
@@ -39,3 +40,31 @@ def add_reading(date, reading, book, content):
     except Exception as e:
         #print(e)
         return False
+
+
+def get_reading(date):
+    print(date)
+    readings = {}
+
+    R = Reading.objects.filter(date = date)
+    for r in R:
+        #RV = ReadingVerse.objects.filter(reading = r.id)
+        RV = ReadingVerse.objects.filter(reading = r).order_by("chapter", "start_verse")
+        readings[r.reading] = runner(r.book, RV)
+        #readings[r.reading] = serializers.serialize("json", )
+
+    return readings
+
+
+def delete_reading(date, reading):
+    R = Reading.objects.filter(date = date)
+    if reading != "*":
+        R = R.filter(reading = reading)
+    
+    try:
+        R.delete()
+        return True
+
+    except Exception as e:
+        print(e)
+        return False;
