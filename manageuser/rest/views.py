@@ -1,7 +1,12 @@
-from user.models import CustomUser
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from orlem_connect.settings import STATIC_DIR
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from django.shortcuts import render
+from user.models import CustomUser
+from django.core import serializers
+
+# Create your views here.
 
 
 class ManageUsers(APIView):

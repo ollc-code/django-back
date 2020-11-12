@@ -27,7 +27,8 @@ urlpatterns = [
     path('bible/', include('bible.urls')),
     path('announcements/', include('announcement.urls')),
     path('associations/', include('associations.urls')),
-    path('information/', include('know_your_priest.urls'))
+    path('information/', include('know_your_priest.urls')),
+    path('manageusers/', include('manageuser.urls')),    
 ]
 
 if settings.DEBUG:

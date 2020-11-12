@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'announcement',
     'associations',
     'know_your_priest',
+    'manageuser',
 
     ### django rest framework
     'rest_framework',
