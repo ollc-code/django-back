@@ -3,6 +3,7 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.core import serializers
+from manageuser.helpers import change_password
 
 
 class ManageUsers(APIView):
@@ -41,9 +42,9 @@ class ManageUsers(APIView):
                 current_password = request.data["current_password"]
                 new_password = request.data["new_password"]
 
+                result = change_password(request.user.username, current_password, new_password)
 
-            result = None 
-            return Response(result)
+                return Response(result)
 
         return Response(False)
     
