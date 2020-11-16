@@ -38,10 +38,11 @@ def query_bible(BOOK_NAME, ReadingVerses):
     return COLLATED_READINGS
 
            
-def runner(BOOK_NAME, ReadingVerses):
+def runner(reading, BOOK_NAME, ReadingVerses):
     ''' ReadingVerses is the QuerySet; function called in .helpers.py '''
     COLLATED_READINGS = query_bible(BOOK_NAME, ReadingVerses)
     response = {
+        'reading': reading,
         'book' : BOOK_NAME,
         'chapter' : ReadingVerses.values("chapter", "start_verse", "end_verse"),
         'text': [lines for lines in COLLATED_READINGS]

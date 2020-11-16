@@ -8,11 +8,11 @@ import json
 
 def cache_todays_reading():
     R = Reading.objects.filter(date = date.today()).order_by('reading')
-    TODAY_READINGS = {}
+    TODAY_READINGS = []
     for r in R:
         print(r.reading)
         RV = ReadingVerse.objects.filter(reading = r).order_by("chapter", "start_verse")
-        TODAY_READINGS[r.reading] = runner(r.book, RV)
+        TODAY_READINGS.append(runner(r.reading, r.book, RV))
 
     return TODAY_READINGS
 
@@ -44,13 +44,13 @@ def add_reading(date, reading, book, content):
 
 def get_reading(date):
     print(date)
-    readings = {}
+    readings = []
 
     R = Reading.objects.filter(date = date)
     for r in R:
         #RV = ReadingVerse.objects.filter(reading = r.id)
         RV = ReadingVerse.objects.filter(reading = r).order_by("chapter", "start_verse")
-        readings[r.reading] = runner(r.book, RV)
+        readings.append(runner(r.reading, r.book, RV))
         #readings[r.reading] = serializers.serialize("json", )
 
     return readings
