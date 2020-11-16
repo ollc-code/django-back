@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'announcement',
     'associations',
     'know_your_priest',
+    'manageuser',
 
     ### django rest framework
     'rest_framework',
@@ -140,6 +141,9 @@ STATIC_DIR = BASE_DIR / 'static' ### PATH OBJECT, not string
 STATICFILES_DIRS = [
     STATIC_DIR,
 ]
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 ### set CustomUser as User model
 AUTH_USER_MODEL = 'user.CustomUser'

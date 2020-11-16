@@ -21,6 +21,7 @@ django-cors-headers = "*"
 numpy = "==1.19.3"
 django-rest-framework = "*"
 djangorestframework-jwt = "*"
+pillow = "*"
 
 [requires]
 python_version = "3.8"

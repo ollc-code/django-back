@@ -23,4 +23,6 @@ Follow steps as required...
 - `python manage.py runserver`
 
 
-##### Added Postman file: `ORLEM CONNECT.postman_collection.json`  ~ Import to use.
+##### Added Postman collection: https://documenter.getpostman.com/view/9429233/TVeneTyc
+
+> Note: On first run, after cloning repository, empty the /media folder. (files were added for github commit only)

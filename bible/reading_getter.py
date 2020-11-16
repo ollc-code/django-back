@@ -20,8 +20,11 @@ def put_in_list(dataframe, COLLATED_READINGS):
 
 def query_bible(BOOK_NAME, ReadingVerses):
     COLLATED_READINGS = []
+    previous = None
     for RV in ReadingVerses:
-        COLLATED_READINGS.append('Chapter %s' %RV.chapter)
+        if RV.chapter != previous:
+            previous = RV.chapter
+            COLLATED_READINGS.append('Chapter %s' %previous)
         curated_read = BIBLE.loc[(BIBLE.book == BOOK_NAME) & (BIBLE.chapter == RV.chapter)]
         try:
             if RV.end_verse:
@@ -35,10 +38,11 @@ def query_bible(BOOK_NAME, ReadingVerses):
     return COLLATED_READINGS
 
            
-def runner(BOOK_NAME, ReadingVerses):
+def runner(reading, BOOK_NAME, ReadingVerses):
     ''' ReadingVerses is the QuerySet; function called in .helpers.py '''
     COLLATED_READINGS = query_bible(BOOK_NAME, ReadingVerses)
     response = {
+        'reading': reading,
         'book' : BOOK_NAME,
         'chapter' : ReadingVerses.values("chapter", "start_verse", "end_verse"),
         'text': [lines for lines in COLLATED_READINGS]
